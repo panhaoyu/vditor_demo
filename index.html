@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://code.bdstatic.com/npm/vditor@3.7.1/dist/index.css"/>
+    <script src="https://code.bdstatic.com/npm/vditor@3.7.1/dist/index.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<div id="vditor" class="vditor">
+# 标题
+
+测试一下本地链接。
+
+![](file:///D:/OneDrive%20-%20%E5%90%8C%E6%B5%8E%E5%A4%A7%E5%AD%A6/%E5%9B%BE%E7%89%87/%E6%9C%AC%E6%9C%BA%E7%85%A7%E7%89%87/2020/2020-01-01%2013-54-25.jpg)
+
+</div>
+</body>
+</html>
+<script>
+    const vditor = new Vditor('vditor', {
+        "upload": {
+            "url": "http://127.0.0.1:5000/qt_vditor/upload_file",
+            // filename(name) {
+            //     return name
+            // },
+            // handler(files) {
+            //     var data=new FormData();
+            //     for (var i in files) {
+            //         data.append('key','value')
+            //     }
+            //     var xhr = new XMLHttpRequest();
+            //     xhr.open("POST", "http://127.0.0.1:5000/qt_vditor/upload_file", true);
+            //     // xhr.setRequestHeader('content-type', 'application/json')
+            //     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            //     // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset-UTF-8");
+            //     xhr.send(data)
+            // }
+        },
+        "mode": "wysiwyg",
+        "height": "auto",
+        "theme": "light",
+        "cache": {
+            "enable": false
+        },
+        "preview": {
+            "theme": {
+                "current": "light"
+            }
+        },
+        "comment": {
+            "enable": true
+        },
+        "toolbarConfig": {
+            "hide": false,
+            "pin": true
+        },
+        "counter": {
+            enable: false,
+            type: 'md'
+        }
+    })
+
+    function saveMDText(path) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://127.0.0.1:5000/qt_vditor/save", true);
+        xhr.setRequestHeader('content-type', 'application/json')
+        var sendData = {'filepath': path, 'md_content': vditor.getValue()}
+        xhr.send(JSON.stringify(sendData))
+    }
+</script>
