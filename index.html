@@ -37,7 +37,7 @@
             //     xhr.send(data)
             // }
         },
-        "mode": "wysiwyg",
+        "mode": "sv",
         "height": "auto",
         "theme": "light",
         "cache": {
@@ -46,6 +46,17 @@
         "preview": {
             "theme": {
                 "current": "light"
+            },
+            transform(html) {
+                const element = document.createElement('div')
+                element.innerHTML = html
+                element.querySelectorAll('img').forEach(e => {
+                    console.log(e.src)
+                    let src = e.src
+                    src = 'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png'
+                    e.src = src
+                })
+                return element.innerHTML
             }
         },
         "comment": {
